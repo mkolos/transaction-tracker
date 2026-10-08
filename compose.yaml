@@ -1,0 +1,16 @@
+services:
+  postgres:
+    # Keep this tag identical to the one used in the Testcontainers tests.
+    image: postgres:18
+    environment:
+      POSTGRES_DB: transactions
+      POSTGRES_USER: tracker
+      POSTGRES_PASSWORD: tracker
+    ports:
+      - "5432:5432"
+    volumes:
+      # Postgres 18 images keep data under /var/lib/postgresql (version-specific subdir inside).
+      - pgdata:/var/lib/postgresql
+
+volumes:
+  pgdata:

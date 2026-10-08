@@ -31,6 +31,15 @@ Checked against current docs/issues before scaffolding. Re-verify when bumping v
 3. **Testcontainers 2.0 renamed classes/modules.** `org.testcontainers.containers.PostgreSQLContainer` is deprecated in favor of `org.testcontainers.postgresql.PostgreSQLContainer` (artifact `testcontainers-postgresql`). Use the new package from day one. Reported caveat: with `@ServiceConnection` plus the new class, an R2DBC connection factory is not discovered. Not relevant here since we use JDBC, but confirm the JDBC `@ServiceConnection` works in the first integration test.
 4. **Boot 4 test API changes.** `@MockBean` is gone in favor of Spring's `@MockitoBean`. Test auto-config is also modularized, so use the `spring-boot-starter-*-test` starters for the slices you use (webmvc, data-jpa) instead of relying on one catch-all.
 
+## Verified by running (2026-10-08)
+Smoke test (`StackSmokeIT`, `MockitoJava25Test`) passes with `./gradlew build` on Temurin 25.0.4 and Gradle 9.8.1:
+- Flyway 12.4.0 migrates against **PostgreSQL 18.6** (gotcha 2 is a non-issue on Boot 4.1.1; keep `postgres:18`).
+- **Testcontainers 2.0.5 is managed by Boot's BOM**: no explicit version needed, only the module artifacts (`testcontainers-junit-jupiter`, `testcontainers-postgresql`). Gotcha 3's `@ServiceConnection` works for JDBC.
+- Hibernate 7.4.5, Mockito 5.23.0, ByteBuddy 1.18.11 resolve; Mockito works on Java 25 with no flags.
+- JaCoCo 0.8.14 generates the report.
+- Starters used: `spring-boot-starter-webmvc` (Boot 4 name), `-data-jpa`, `-flyway`, plus `-test`, `-webmvc-test`, `-data-jpa-test`, `spring-boot-testcontainers`.
+- Still unpinned/unverified: Commons CSV, springdoc-openapi.
+
 ## Week 1 smoke test (do before building features)
 1. `./gradlew bootRun` on Java 25 starts cleanly.
 2. Flyway V1 applies against `postgres:<tag>` in Compose, and the Flyway log lines appear.

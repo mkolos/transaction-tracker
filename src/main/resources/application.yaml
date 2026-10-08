@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: transaction-tracker
+  datasource:
+    url: jdbc:postgresql://localhost:5432/transactions
+    username: tracker
+    password: tracker
+  jpa:
+    hibernate:
+      # Flyway owns the schema. Hibernate only validates, never generates DDL.
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    locations: classpath:db/migration
