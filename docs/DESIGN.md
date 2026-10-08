@@ -1,6 +1,6 @@
 # Transaction Tracker: Design
 
-Status: approved 2026-10-07, pre-implementation. See [ROADMAP.md](ROADMAP.md) for schedule and testing and [COMPATIBILITY.md](COMPATIBILITY.md) for verified versions.
+Status: approved 2026-10-07. Implementation started 2026-10-08 (scaffold and the categories/transactions schema are done). See [ROADMAP.md](ROADMAP.md) for schedule and testing and [COMPATIBILITY.md](COMPATIBILITY.md) for verified versions.
 
 ## 1. Key decisions (summary)
 1. **Postgres job table over `@Async`/broker.** `@Async` is an in-memory pool: jobs vanish on restart, with no retry or status. A table with `FOR UPDATE SKIP LOCKED` gives durability, atomic enqueue with data, and teaches real queue mechanics, with zero extra infra.
@@ -10,7 +10,7 @@ Status: approved 2026-10-07, pre-implementation. See [ROADMAP.md](ROADMAP.md) fo
 5. **Rules in DB**, first-match-wins, strategy-pattern matchers, MANUAL edits always win.
 6. **Row errors are data** (`import_errors`), not exceptions. Permanent vs transient failures are classified.
 7. **CSV formats: hybrid.** DB mapping profiles by default, coded `BankFormat` plugins as escape hatch.
-8. RFC 7807 errors, 202 + polling, Flyway migrations, packages `api / service / domain / jobs / parsing`.
+8. RFC 7807 errors, 202 + polling, Flyway migrations, classic layered packages: `domain` (entities), `repository`, `service`, `api` (controllers), later `jobs`, `parsing`.
 9. Interfaces at the seams (`BankFormat`, `FileStore`, `RuleMatcher`): each is a test seam and a v2 extension point.
 
 ### Async options considered
@@ -28,6 +28,13 @@ Status: approved 2026-10-07, pre-implementation. See [ROADMAP.md](ROADMAP.md) fo
 - Tradeoff: heavier than SQLite locally. Docker Compose + Testcontainers solve it, and tests run on the real engine.
 
 ## 3. Schema (v1)
+
+**Built incrementally: one Flyway migration per feature, only what that feature needs.** The block below is the *target* schema, not what exists today.
+
+| Migration | Adds | Notes |
+|---|---|---|
+| `V1__categories_and_transactions` (done) | `categories`; `transactions` without `upload_id`, `description_norm`, `dedup_hash` | `matched_rule_id` is a plain `BIGINT` for now; the rule-engine migration adds the FK. DB `CHECK`s enforce currency format, valid `category_source`, rule-implies-RULE-source, and source-implies-category. |
+| later | `csv_profiles`, `uploads`, `jobs`, `import_errors`, `categorization_rules`, `dedup_hash`/`upload_id`/`description_norm` columns | Each lands with its feature week. |
 
 ```
 categories(id PK, name UNIQUE, created_at)
