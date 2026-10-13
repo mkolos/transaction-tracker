@@ -1,27 +1,13 @@
 package com.kolosh.transactiontracker.api;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.empty;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 
-import com.kolosh.transactiontracker.PostgresTestConfig;
-import com.kolosh.transactiontracker.domain.Category;
-import com.kolosh.transactiontracker.domain.CategorySource;
-import com.kolosh.transactiontracker.domain.Transaction;
-import com.kolosh.transactiontracker.repository.CategoryRepository;
-import com.kolosh.transactiontracker.repository.TransactionRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.empty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +16,20 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.kolosh.transactiontracker.PostgresTestConfig;
+import com.kolosh.transactiontracker.domain.Category;
+import com.kolosh.transactiontracker.domain.CategorySource;
+import com.kolosh.transactiontracker.domain.Transaction;
+import com.kolosh.transactiontracker.repository.CategoryRepository;
+import com.kolosh.transactiontracker.repository.TransactionRepository;
 
 /**
  * Full stack: HTTP -> controller -> service -> JPA -> real Postgres. Deliberately NOT @Transactional,
@@ -49,11 +49,11 @@ class TransactionApiIT {
 
     Category food;
     Category rent;
-    Transaction coffee;      // 2026-09-01  -4.50  USD  Food
-    Transaction rentPayment; // 2026-09-05  -1200  EUR  Rent
-    Transaction sale;        // 2026-09-10  -50    USD  uncategorized, description has % and _
-    Transaction salary;      // 2026-09-15  +2500  USD  uncategorized
-    Transaction coffee2;     // 2026-10-01  -4.50  USD  Food
+    Transaction coffee;
+    Transaction rentPayment;
+    Transaction sale;
+    Transaction salary;
+    Transaction coffee2;
 
     @BeforeEach
     void seed() {

@@ -114,6 +114,8 @@ Errors use RFC 7807 `application/problem+json` (Spring `ProblemDetail`):
 ```
 Status map: 202 accepted async, 400 malformed request, 404, 409 duplicate file, 413 too large, 415 not CSV, 422 semantically invalid (unknown category, no matching CSV profile).
 
+Transactions API notes (Week 2): `category` is a category **id**; `uncategorized=true` with `category` is a 400; `currency` is case-insensitive; `q` is a case-insensitive substring match with `%`/`_` escaped; `sort` is whitelisted to `bookedOn|amount|description|createdAt` (default `bookedOn,desc`) with `id` appended as a paging tie-breaker; page size is capped at 200. `matchedRuleId` is returned as an id until the rules table exists. Verified with `EXPLAIN ANALYZE` on 200k rows: date, category+date, and rare-currency filters use their indexes; common-currency, uncategorized, `q` (leading-wildcard LIKE) and amount-range filters fall back to scans. Fine for a single-user dataset; `pg_trgm` for `q` and an amount index are the first things to add if they get slow.
+
 Decisions: 202 + polling (SSE/webhooks are v2). Offset paging now, keyset later. Money as decimal string in JSON. Upload-time validation is shallow (extension, size, header sniff); row validation happens in the job.
 
 ## 5. Async architecture
