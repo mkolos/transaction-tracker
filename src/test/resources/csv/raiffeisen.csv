@@ -1,0 +1,12 @@
+Könyvelt tételek;;;;;;;;
+Típus;Könyvelés dátuma;Értéknap;Azonosító;Összeg;Közlemény/1;Közlemény/2;Közlemény/3;Közlemény/4
+Kártyatranzakció;2026.08.31., hétfõ;2026.08.31., hétfõ;214T260831V00001;-20 000,00 HUF;4000000000000000 20260829 00000000;OTP BUDAPEST;20.000,00 HUF Kp felvét;
+Kártyatranzakció;2026.08.31., hétfõ;2026.08.31., hétfõ;214T260831V00002;-3 780,00 HUF;4000000000000000 20260829 00000000;PESTIPIPI STADION - POSBUDAPEST;3.780,00 HUF Vásárlás;
+Állandó átutalás;2026.08.27., csütörtök;2026.08.27., csütörtök;BBK26H0000100003;-108 106,00 HUF;000000000000000000000000;Example Owner;Lakáshitel törlesztõrészlet;
+Elektronikus bankon belüli átutalás;2026.08.25., kedd;2026.08.25., kedd;ABK26H0000400004;-25 000,00 HUF;HU0000000000000000000000;Sample Person, 00000000;BZS-2026-473;
+Forint átutalás;2026.08.25., kedd;2026.08.25., kedd;GNB26H2500000005;150 000,00 HUF;000000000000000000000000;Citibank Europe Public Limited;KQ7NHUFACPXESent from Revolut;
+Elektronikus forint átutalás;2026.08.25., kedd;2026.08.24., hétfõ;AFK26H0002200006;-26 000,00 HUF;HU0000000000000000000000;Sample Provider;Szolgáltatás - Example Owner 08.24;
+Kártyatranzakció;2026.08.18., kedd;2026.08.18., kedd;214T260818V00007;-1 200,00 HUF;4000000000000000 20260816 00000000;FIRMAND KFT BUDAPEST;1.200,00 HUF Vásárlás;
+Elektronikus forint átutalás;2026.08.18., kedd;2026.08.18., kedd;AFK26H0001600008;-25 490,00 HUF;HU0000000000000000000000;Ingatlan.com Zrt.;000000000, user@example.com;
+Elektronikus forint átutalás;2026.08.18., kedd;2026.08.17., hétfõ;AFK26H0001600009;-26 000,00 HUF;HU0000000000000000000000;Sample Provider;Szolgáltatás - Example Owner 08.17;
+;;;;;;;;

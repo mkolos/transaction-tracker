@@ -1,0 +1,8 @@
+Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
+Card Payment,Current,2026-08-01 12:40:56,2026-08-02 09:01:06,Sample Cafe,-4.50,0.00,EUR,COMPLETED,95.50
+Card Payment,Current,2026-13-45 00:00:00,2026-13-45 00:00:00,Bad Date,-1.00,0.00,EUR,COMPLETED,1.00
+Card Payment,Current,2026-08-04 00:00:00,2026-08-04 00:00:00,Bad Amount,twelve,0.00,EUR,COMPLETED,1.00
+Card Payment,Current,2026-08-04 00:00:00,2026-08-04 00:00:00,,-2.00,0.00,EUR,COMPLETED,1.00
+Card Payment,Current,2026-08-04 00:00:00,2026-08-04 00:00:00,Too Few Cells
+Card Payment,Current,2026-08-04 00:00:00,2026-08-04 00:00:00,Bad Currency,-2.00,0.00,eur1,COMPLETED,1.00
+Topup,Current,2026-08-03 08:00:00,2026-08-03 08:00:02,Top-up by *0000,100.00,0.00,EUR,COMPLETED,195.50

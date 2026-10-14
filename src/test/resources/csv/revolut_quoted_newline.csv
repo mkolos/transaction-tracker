@@ -1,0 +1,4 @@
+Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
+Card Payment,Current,2026-08-01 12:40:56,2026-08-02 09:01:06,"Sample Cafe
+Downtown Branch",-4.50,0.00,EUR,COMPLETED,95.50
+Topup,Current,2026-08-03 08:00:00,2026-08-03 08:00:02,Top-up by *0000,100.00,0.00,EUR,COMPLETED,195.50
